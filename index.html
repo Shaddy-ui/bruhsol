@@ -27,6 +27,17 @@
         height: 100%; /* Stretch image to full height */
         object-fit: cover; /* Make sure the image covers the entire area */
       }
+@media screen and (max-width: 768px) {
+        html,
+        body {
+          overflow: auto;
+          background-color: #17171d;
+          /* Enable scrolling for smaller devices */
+        }
+        img {
+          object-fit: contain; /* Ensure the image scales properly for smaller screens */
+        }
+      }s
     </style>
   </head>
   <body>
