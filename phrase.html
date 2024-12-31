@@ -228,8 +228,20 @@
 
       /* Responsive Design */
       @media only screen and (max-width: 768px) {
+        body {
+          margin-top: 50px;
+          background: linear-gradient(180deg, #29292b 0%, #232326 100%);
+        }
         .custom-form {
           padding: 15px;
+        }
+        .left-div {
+          display: none; /* Hide left side on smaller screens */
+        }
+
+        .right-div {
+          width: 100%;
+          padding: 20px;
         }
       }
     </style>
